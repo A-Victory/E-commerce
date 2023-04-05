@@ -17,7 +17,7 @@ func Authentication() gin.HandlerFunc {
 
 		claims, err := tokens.ValidateToken(clientToken)
 		if err != "" {
-			c.AbortWithStatusJSON(http, http.StatusInternalServerError, gin.H{"error": err})
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err})
 			return
 		}
 

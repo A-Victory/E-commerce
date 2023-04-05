@@ -83,7 +83,7 @@ func ValidateToken(signedToken string) (claims *SignedDetails, msg string) {
 
 }
 
-func UpdateToken(signedtoken, signedrefreshtoken, userID string) (string, error) {
+func UpdateToken(signedtoken, signedrefreshtoken, userID string) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 
@@ -105,5 +105,6 @@ func UpdateToken(signedtoken, signedrefreshtoken, userID string) (string, error)
 	userData.UpdateOne(ctx, filter, bson.D{
 		{Key: "$set", Value: updateObj},
 	}, &opt)
+
 	defer cancel()
 }
