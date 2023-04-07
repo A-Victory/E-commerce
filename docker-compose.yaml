@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: development
+      MONGO_INITDB_ROOT_PASSWORD: testpassword
+    ports:
+      - 27017:27017
+
+
+  mongo-express:
+    image: mongo-express
+    environment:
+      ME_CONFIG_MONGO_INITDB_ROOT_USERNAME: development
+      ME_MONGO_INITDB_ROOT_PASSWORD: development
+      ME_CONFIG_MONGODB_URL: mongodb://development:testpassword@mongo:27017/
+    ports:
+      - 8081:8081
+    
