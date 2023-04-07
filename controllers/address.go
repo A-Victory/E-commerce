@@ -38,7 +38,7 @@ func AddAddress() gin.HandlerFunc {
 		if err != nil {
 			log.Println(err)
 
-			c.AbortWithStatusJSON(http.StatusInternalServerError, errors.New("Internal server error"))
+			c.AbortWithStatusJSON(http.StatusInternalServerError, errors.New("internal server error"))
 			return
 		}
 
@@ -92,7 +92,7 @@ func EditHomeAddress() gin.HandlerFunc {
 		userID, err := primitive.ObjectIDFromHex(user_id)
 		if err != nil {
 			log.Println("userid is not valid")
-			c.AbortWithStatusJSON(http.StatusInternalServerError, errors.New("Internal server error"))
+			c.AbortWithStatusJSON(http.StatusInternalServerError, errors.New("internal server error"))
 			return
 		}
 
@@ -125,7 +125,7 @@ func EditWorkAddress() gin.HandlerFunc {
 		userID, err := primitive.ObjectIDFromHex(user_id)
 		if err != nil {
 			log.Println("userid is not valid")
-			c.AbortWithStatusJSON(http.StatusInternalServerError, errors.New("Internal server error"))
+			c.AbortWithStatusJSON(http.StatusInternalServerError, errors.New("internal server error"))
 			return
 		}
 
@@ -159,7 +159,7 @@ func DeleteAddress() gin.HandlerFunc {
 		userID, err := primitive.ObjectIDFromHex(user_id)
 		if err != nil {
 			log.Println("userid is not valid")
-			c.AbortWithStatusJSON(http.StatusInternalServerError, errors.New("Internal server error"))
+			c.AbortWithStatusJSON(http.StatusInternalServerError, errors.New("internal server error"))
 			return
 		}
 
