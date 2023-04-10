@@ -12,7 +12,7 @@ type User struct {
 	Last_Name       string             `json:"lastname" validate:"required,min=2,max=20"`
 	Password        string             `json:"password" validate:"required,alphanum,min=8"`
 	Email           string             `json:"email" validate:"required,email"`
-	Phone           string             `json:"phone"`
+	Phone           string             `json:"phone" validate:"required"`
 	User_ID         string             `json:"user_id"`
 	UserCart        []ProductUser      `json:"usercart" bson:"usercart"`
 	Token           string             `json:"token"`

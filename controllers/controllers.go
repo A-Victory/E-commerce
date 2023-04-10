@@ -15,8 +15,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-var userCollection *mongo.Collection = database.UserData(database.Client, "user")
-var prodCollection *mongo.Collection = database.ProductData(database.Client, "product")
+var userCollection *mongo.Collection = database.UserData(database.Client, "users")
+var prodCollection *mongo.Collection = database.ProductData(database.Client, "products")
 
 func Signup() gin.HandlerFunc {
 
@@ -32,7 +32,7 @@ func Signup() gin.HandlerFunc {
 
 		validationErr := validate().Struct(user)
 		if validationErr != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": validationErr})
+			c.JSON(http.StatusBadRequest, gin.H{"error": "fill all required fields"})
 			return
 		}
 
@@ -96,6 +96,7 @@ func Login() gin.HandlerFunc {
 			return
 		}
 
+		c.Set("token", token)
 		tokens.UpdateToken(token, refreshToken, founduser.User_ID)
 
 		c.JSON(http.StatusOK, founduser)
@@ -103,6 +104,7 @@ func Login() gin.HandlerFunc {
 	}
 }
 
+// The product view func allows lets users create products.
 func ProductView() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
@@ -124,7 +126,8 @@ func ProductView() gin.HandlerFunc {
 	}
 }
 
-func SearchProduct() gin.HandlerFunc {
+// ViewProduct allows users view all products available
+func ViewProduct() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		var productlist []models.Product
@@ -156,6 +159,7 @@ func SearchProduct() gin.HandlerFunc {
 	}
 }
 
+// SearchProductByQuery allows user to search for a particular product
 func SearchProductByQuery() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var searchProduct []models.Product

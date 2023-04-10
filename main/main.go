@@ -17,7 +17,7 @@ func main() {
 		port = "8080"
 	}
 
-	app := controllers.NewApplication(database.ProductData(database.Client, "product"), database.UserData(database.Client, "user"))
+	app := controllers.NewApplication(database.ProductData(database.Client, "products"), database.UserData(database.Client, "users"))
 
 	router := gin.New()
 	router.Use(gin.Logger())
@@ -29,6 +29,10 @@ func main() {
 	router.GET("/removeitem", app.RemoveFromCart())
 	router.GET("/cartcheckout", app.BuyFromCart())
 	router.GET("/instantbuy", app.InstantBuy())
+	router.POST("/addaddress", controllers.AddAddress())
+	router.PUT("/edithomeaddress", controllers.EditHomeAddress())
+	router.PUT("/editworkaddress", controllers.EditWorkAddress())
+	router.GET("/deleteaddress", controllers.DeleteAddress())
 
 	log.Fatal(router.Run(":" + port))
 }

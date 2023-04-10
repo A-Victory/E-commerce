@@ -26,6 +26,7 @@ type SignedDetails struct {
 	jwt.StandardClaims
 }
 
+// GeneratToken generates new tokens for JWT authentication
 func GenerateToken(firstname, lastname, email, uid string) (signedtoken string, signedrefreshtoken string, err error) {
 
 	claims := &SignedDetails{
@@ -59,6 +60,7 @@ func GenerateToken(firstname, lastname, email, uid string) (signedtoken string, 
 
 }
 
+// ValidateToken validates the tokens in the provided
 func ValidateToken(signedToken string) (claims *SignedDetails, msg string) {
 	token, err := jwt.ParseWithClaims(signedToken, &SignedDetails{}, func(t *jwt.Token) (interface{}, error) {
 		return []byte(secretkey), nil
@@ -83,6 +85,7 @@ func ValidateToken(signedToken string) (claims *SignedDetails, msg string) {
 
 }
 
+// UpdateToken updates the token fields in the user's database.
 func UpdateToken(signedtoken, signedrefreshtoken, userID string) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)

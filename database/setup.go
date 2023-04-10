@@ -10,6 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// dbSetUp implements and instantiates a new MongoDB Client
 func dbSetUp() *mongo.Client {
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
 	if err != nil {
@@ -32,13 +33,16 @@ func dbSetUp() *mongo.Client {
 	return client
 }
 
+// Client is a client for connecting to the database
 var Client *mongo.Client = dbSetUp()
 
+// UserData returns a *mongo.Collections for the user's collection
 func UserData(client *mongo.Client, collectionName string) *mongo.Collection {
 	coll := client.Database("E-commerce").Collection(collectionName)
 	return coll
 }
 
+// UProductData returns a *mongo.Collections for the product's collection
 func ProductData(client *mongo.Client, collectionName string) *mongo.Collection {
 	coll := client.Database("E-commerce").Collection(collectionName)
 	return coll

@@ -22,6 +22,7 @@ var (
 	ErrCartItemBuyFailed  = errors.New("unable to buy product from cart")
 )
 
+// AddProductToCart adds a product to products database
 func AddProductToCart(ctx context.Context, prodCollection *mongo.Collection, userCollection *mongo.Collection, prodID primitive.ObjectID, userID string) error {
 	searchfromdb, err := prodCollection.Find(ctx, bson.M{"_id": prodID})
 	if err != nil {
@@ -55,6 +56,7 @@ func AddProductToCart(ctx context.Context, prodCollection *mongo.Collection, use
 	return nil
 }
 
+// RemoveCartItem removes a product from the user's cart
 func RemoveCartItem(ctx context.Context, prodCollection *mongo.Collection, userCollection *mongo.Collection, prodID primitive.ObjectID, userID string) error {
 	id, err := primitive.ObjectIDFromHex(userID)
 	if err != nil {
@@ -73,6 +75,7 @@ func RemoveCartItem(ctx context.Context, prodCollection *mongo.Collection, userC
 	return nil
 }
 
+// BuyItemFromCart is the helper function for database interaction for the BuyFromCart function in controllers.Cart
 func BuyItemFromCart(ctx context.Context, userCollection *mongo.Collection, userID string) error {
 	id, err := primitive.ObjectIDFromHex(userID)
 	if err != nil {
@@ -142,6 +145,7 @@ func BuyItemFromCart(ctx context.Context, userCollection *mongo.Collection, user
 	return nil
 }
 
+// InstantBuy is the helper function for database interaction for the InstantBuy function in controllers.Cart
 func InstantBuy(ctx context.Context, prodCollection *mongo.Collection, userCollection *mongo.Collection, prodID primitive.ObjectID, userID string) error {
 	id, err := primitive.ObjectIDFromHex(userID)
 	if err != nil {

@@ -9,6 +9,6 @@ func UserRoutes(incomingRoutes *gin.Engine) {
 	incomingRoutes.POST("/users/signup", controllers.Signup())
 	incomingRoutes.POST("/users/login", controllers.Login())
 	incomingRoutes.GET("/users/search", controllers.SearchProductByQuery())
-	incomingRoutes.GET("/users/productview", controllers.SearchProduct())
+	incomingRoutes.GET("/users/productview", controllers.ViewProduct())
 	incomingRoutes.POST("/admin/addproduct", controllers.ProductView())
 }

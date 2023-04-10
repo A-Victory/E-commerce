@@ -14,6 +14,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// AddAddress lets a user add a new address
 func AddAddress() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user_id := c.Query("id")
@@ -79,6 +80,7 @@ func AddAddress() gin.HandlerFunc {
 	}
 }
 
+// EditWorkAddress updates user's address
 func EditHomeAddress() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user_id := c.Query("id")
@@ -112,6 +114,7 @@ func EditHomeAddress() gin.HandlerFunc {
 	}
 }
 
+// EditWorkAddress updates user's address
 func EditWorkAddress() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user_id := c.Query("id")
@@ -145,6 +148,7 @@ func EditWorkAddress() gin.HandlerFunc {
 	}
 }
 
+// DeleteAddress deletes the specified address
 func DeleteAddress() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user_id := c.Query("id")

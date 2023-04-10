@@ -20,6 +20,7 @@ type Application struct {
 	userCollection *mongo.Collection
 }
 
+// NewApplication initializes a new instance for Application
 func NewApplication(prodCollection, userCollection *mongo.Collection) *Application {
 	return &Application{
 		prodCollection: prodCollection,
@@ -27,6 +28,7 @@ func NewApplication(prodCollection, userCollection *mongo.Collection) *Applicati
 	}
 }
 
+// AddToCart lets user add a product to their cart
 func (app *Application) AddToCart() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		productQueryID := c.Query("id")
@@ -66,6 +68,7 @@ func (app *Application) AddToCart() gin.HandlerFunc {
 	}
 }
 
+// RemoveFromCart removes an item from the user's cart
 func (app *Application) RemoveFromCart() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		productQueryID := c.Query("id")
@@ -105,6 +108,7 @@ func (app *Application) RemoveFromCart() gin.HandlerFunc {
 	}
 }
 
+// Get item from cart lets the user see items in the cart
 func (app *Application) GetItemFromCart() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		user_id := c.Query("user_id")
@@ -158,6 +162,7 @@ func (app *Application) GetItemFromCart() gin.HandlerFunc {
 	}
 }
 
+// BuyItemFromCart lets the user buy all products in cart.
 func (app *Application) BuyFromCart() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userQueryID := c.Query("userid")
@@ -181,6 +186,7 @@ func (app *Application) BuyFromCart() gin.HandlerFunc {
 	}
 }
 
+// InstantBuy lets a user buy a product without adding the item to their cart
 func (app *Application) InstantBuy() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		productQueryID := c.Query("id")
